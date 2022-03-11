@@ -1,21 +1,17 @@
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Item implements ItemInterface{
-
+	private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	private double price;
 	 String name,classname;
 	 int size;
-	 Date expiryDate;
+	 String expiryDate;
 	
 	public Item(double price,String name,int size,String expiryDate,String classname) {
-		try {
-			this.expiryDate=new SimpleDateFormat("dd/mm/yyyy").parse(expiryDate);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+		this.expiryDate=expiryDate;
 		this.size=size;
 		this.name=name;
 		this.price=price;
@@ -24,9 +20,19 @@ public class Item implements ItemInterface{
 	
 	public int viewExpiry() {
 		Date today=new Date();
-		int dayLeft=expiryDate.compareTo(today);
-		if(dayLeft<=1)System.out.println("ITEM EXPIRED");
-		return dayLeft;
+		int remaining=0;
+		try {
+			Date exDate=dateFormat.parse(expiryDate);
+			Date todayDate=dateFormat.parse(dateFormat.format(today));
+			long difference_In_Time= exDate.getTime() - todayDate.getTime();
+			long difference_In_Days= (difference_In_Time/ (1000 * 60 * 60 * 24))% 365;
+			remaining=(int)difference_In_Days;
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		if(remaining<=1)System.out.println("ITEM EXPIRED");
+		return remaining;
 	}
 	
 	@Override

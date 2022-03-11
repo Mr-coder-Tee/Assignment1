@@ -19,8 +19,10 @@ public class Retail {
 	}
 	public double totalSales() {
 		double sum=0;
-		for(Item item:stock) {
+		for(Item item:sold) {
+			
 			sum+=item.getPrice();
+			
 		}
 		return sum;
 	}
@@ -28,11 +30,11 @@ public class Retail {
 		for(int i=0;i<stock.size();i++) {
 			Item item=stock.get(i);
 			if(item.name.equals(name)&&item.size==size) {
-				Date today=new Date();
-				int dayLeft=item.expiryDate.compareTo(today);
+//				Date today=new Date();
+				int dayLeft=item.viewExpiry();
 				sold.add(item);
 				stock.remove(i);
-				System.out.println("Name: "+item.name+"\t Size:"+item.size+"\t Days left:"+dayLeft);
+				System.out.println("Name: "+item.name+"\t Size: "+item.size+"\t Days left: "+dayLeft);
 				return;
 			}
 		}
@@ -65,6 +67,7 @@ public class Retail {
 		}
 		
 	}
+	
 
 }
 

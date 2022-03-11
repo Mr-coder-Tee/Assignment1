@@ -1,4 +1,5 @@
 
+
 public class Solution {
 
 	public static void main(String[] args) {
@@ -8,7 +9,7 @@ public class Solution {
 		Drink drink1=new Drink(12.0,"coke",1,"1/12/2022","Drink","fizzy drink");
 		Drink drink2=new Drink(12.0,"coke",1,"9/02/2022","Drink","fizzy drink");
 		
-		Diary diary1=new Diary(12.99,"milk",1,"1/12/2022","Diary",22.2);
+		Diary diary1=new Diary(12.99,"milk",1,"12/03/2022","Diary",22.2);
 		Diary diary2=new Diary(32.99,"yughurt",10,"1/6/2022","Diary",37.5);
 		
 		Detergent detergent1=new Detergent(22.0,"old spice",1,"1/4/2022","Detergent","liquid");
@@ -20,8 +21,12 @@ public class Solution {
 		retail.addItem(diary2);
 		retail.addItem(detergent1);
 		retail.addItem(detergent2);
-		
-		retail.viewStock();
+		retail.sell("milk", 1);
+		retail.sell("coke", 1);
+		//retail.viewStock();
+		retail.totalSales();
+//		System.out.println(retail.totalSales());
+
 	}
 
 }
